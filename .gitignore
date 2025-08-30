@@ -1,0 +1,14 @@
+# Altium temporary files
+*.PrjPCBBackup
+*.PrjPCBBackups
+*.TMP
+*.Tcl
+*.DSN-Cache
+*.bak
+*.old
+*.unsaved
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
