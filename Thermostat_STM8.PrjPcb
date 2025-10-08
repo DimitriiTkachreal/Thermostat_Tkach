@@ -101,6 +101,23 @@ GenerateClassCluster=0
 DocumentUniqueId=
 
 [Document4]
+DocumentPath=schematics\USBTTL1_TYPE_C.SchLib
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=0
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=NLPTRABO
+
+[Document5]
 DocumentPath=schematics\CONct.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -117,7 +134,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=YLLCNRBH
 
-[Document5]
+[Document6]
 DocumentPath=schematics\DISPLAY.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -134,7 +151,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=FBKSXMNU
 
-[Document6]
+[Document7]
 DocumentPath=Thermostat_STM8.OutJob
 AnnotationEnabled=1
 AnnotateStartValue=1
