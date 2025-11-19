@@ -1,0 +1,44 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build: firmware",
+           
+            "type": "shell",
+            
+         
+            "command": "cxstm8 -i\"${workspaceFolder}/Software/platform/cosmic_headers\" \"Software/core/main.c\" -o\"Software/build/main.o\" && clnk \"Software/build/main.o\" -o\"Software/build/firmware.s19\"",
+
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+
+            "options": {
+                "shell": {
+                    "executable": "cmd.exe",
+                    "args": [
+                        "/C"
+                    ]
+                }
+            }
+        },
+         {
+            "label": "clean: build folder",
+            "type": "shell",
+            "command": "del \"Software\\build\\*.*\" /q && del \"Software\\core\\*.o\" /q",
+            "problemMatcher": [],
+            "options": {
+                "shell": {
+                    "executable": "cmd.exe",
+                    "args": [
+                        "/C"
+                    ]
+                }
+            }
+        }
+    ]
+}
