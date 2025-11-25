@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "STM8_Cosmic_BareMetal",
+            "name": "STM8",
             "includePath": [
                 "${workspaceFolder}/Software/**",
                 "${workspaceFolder}/Software/platform/cosmic_headers"
@@ -9,8 +9,11 @@
             "defines": [
                 "STM8S103" 
             ],
+            // Цей "хак" іноді допомагає прибрати помилки на "@"
+            "forcedInclude": [],
+            "compilerPath": "",
             "cStandard": "c89",
-            "intelliSenseMode": "clang-x64"
+            "intelliSenseMode": "gcc-x64"
         }
     ],
     "version": 4

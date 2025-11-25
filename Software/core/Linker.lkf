@@ -1,0 +1,30 @@
+# 1. Визначення сегментів (Segments)
+# Код (Flash) починається з 0x8080 для STM8S103
++seg .text -b 0x8080 -n .text
++seg .const -a .text -n .const
+
+# Змінні (RAM) починаються з 0x00
++seg .bsct -b 0x0 -n .bsct
++seg .ubsct -a .bsct -n .ubsct
++seg .data -a .ubsct -n .data
++seg .bss -a .data -n .bss
+
+# 2. Системні файли та Бібліотеки
+# Стартовий код (щоб запустити main)
+"C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\Lib\crtsi0.sm8"
+
+# Твій скомпільований файл
+main.o
+
+# Математична бібліотека (Machine lib) - ВИПРАВЛЯЄ c_ltor, c_lcmp
+"C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\Lib\libm0.sm8"
+
+# Стандартна бібліотека (Integer lib)
+"C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\Lib\libis0.sm8"
+
+
+# 3. Визначення символів (Symbols)
+# Це виправляє помилки __stack, __memory, __endzp
++def __endzp=@.ubsct      # Кінець "нульової сторінки"
++def __memory=@.bss       # Кінець зайнятої пам'яті
++def __stack=0x3FF        # Вершина стека (кінець RAM для STM8S103F3)

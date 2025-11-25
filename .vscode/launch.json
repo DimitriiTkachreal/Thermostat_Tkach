@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "STM8: Flash",
+            "type": "stm8-debug",
+            "request": "launch",
+            
+            // --- ПРАВИЛЬНА КОМАНДА САМЕ ДЛЯ ЦЬОГО ПЛАГІНА ---
+            "executable": "${workspaceFolder}/Software/build/firmware.s19",
+            
+            "cpu": "STM8S103F3P",
+            "serverType": "stm8-sdcc", // Або "openocd", якщо цей не спрацює
+            
+            "preLaunchTask": "build: firmware"
+        }
+    ]
+}

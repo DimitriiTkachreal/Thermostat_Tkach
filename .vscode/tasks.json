@@ -1,44 +1,57 @@
 {
     "version": "2.0.0",
     "tasks": [
+        // --- ЗАДАЧА 1: КОМПІЛЯЦІЯ (Це вже працює) ---
         {
             "label": "build: firmware",
-           
             "type": "shell",
-            
-         
-            "command": "cxstm8 -i\"${workspaceFolder}/Software/platform/cosmic_headers\" \"Software/core/main.c\" -o\"Software/build/main.o\" && clnk \"Software/build/main.o\" -o\"Software/build/firmware.s19\"",
-
+            "command": "cd Software\\core && cxstm8 -i\"../../platform/cosmic_headers\" +mods0 main.c && clnk -o ..\\build\\firmware.s19 Linker.lkf",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "problemMatcher": [
-                "$gcc"
-            ],
-
+            "problemMatcher": ["$gcc"],
             "options": {
                 "shell": {
                     "executable": "cmd.exe",
-                    "args": [
-                        "/C"
-                    ]
+                    "args": ["/d", "/c"]
                 }
             }
         },
-         {
-            "label": "clean: build folder",
+        
+        // --- ЗАДАЧА 2: ОЧИСТКА (Це вже працює) ---
+        {
+            "label": "clean: build",
             "type": "shell",
-            "command": "del \"Software\\build\\*.*\" /q && del \"Software\\core\\*.o\" /q",
+            "command": "del Software\\build\\*.* /q && del Software\\core\\*.o /q",
             "problemMatcher": [],
             "options": {
                 "shell": {
                     "executable": "cmd.exe",
-                    "args": [
-                        "/C"
-                    ]
+                    "args": ["/d", "/c"]
                 }
             }
+        },
+
+        // --- ЗАДАЧА 3: ПРОШИВКА (НОВА!) ---
+        {
+            "label": "flash: stvp",
+            "type": "process",
+            // !!! ПЕРЕВІР ЦЕЙ ШЛЯХ НА СВОЄМУ ПК !!!
+            "command": "C:\\Program Files (x86)\\STMicroelectronics\\st_toolset\\stvp\\STVP_CmdLine.exe",
+            "args": [
+                "-BoardName=ST-LINK",
+                "-Port=USB",
+                "-ProgMode=SWIM",
+                "-Device=STM8S103F3",     // Твій мікроконтролер
+                "-no_loop",               // Не повторювати
+                "-no_log",                // Не писати лог
+                "-verif",                 // Перевірити після запису
+                // Шлях до файлу прошивки (зверни увагу на подвійні слеші \\)
+                "-FileProg=${workspaceFolder}\\Software\\build\\firmware.s19"
+            ],
+            "dependsOn": "build: firmware", // Спочатку скомпілювати, потім шити
+            "problemMatcher": []
         }
     ]
 }
