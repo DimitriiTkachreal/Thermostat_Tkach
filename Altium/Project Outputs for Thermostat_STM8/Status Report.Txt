@@ -1,0 +1,11 @@
+Output: Generates pick and place files
+Type  : Pick Place
+From  : Variant [[No Variations]] of Project [Thermostat_STM8.PrjPcb]
+   Generated File[Pick Place for PCB_Therm.txt]
+   Generated File[Pick Place for PCB_Therm.csv]
+
+
+Files Generated   : 2
+Documents Printed : 0
+
+Finished Output Generation At 23:40:01 On 29.11.2025

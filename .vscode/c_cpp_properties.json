@@ -1,17 +1,15 @@
 {
     "configurations": [
         {
-            "name": "STM8",
+            "name": "STM8_Cosmic",
             "includePath": [
                 "${workspaceFolder}/Software/**",
                 "${workspaceFolder}/Software/platform/cosmic_headers"
             ],
             "defines": [
-                "STM8S103" 
+                "STM8S103"
             ],
-            // Цей "хак" іноді допомагає прибрати помилки на "@"
-            "forcedInclude": [],
-            "compilerPath": "",
+            // Цей параметр допомагає ігнорувати деякі помилки синтаксису Cosmic
             "cStandard": "c89",
             "intelliSenseMode": "gcc-x64"
         }

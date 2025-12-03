@@ -1,0 +1,55 @@
+Altium Designer Pick and Place Locations
+C:\github\Thermostat_Tkach\Altium\Project Outputs for Thermostat_STM8\Pick Place for PCB_Therm.csv
+
+========================================================================================================================
+File Design Information:
+
+Date:       29.11.25
+Time:       23:40
+Revision:   fee33c3e1699fdd7cf6345554aad223716404bd7
+Variant:    No variations
+Units used: mm
+
+"Designator","Comment","Layer","Footprint","Center-X(mm)","Center-Y(mm)","Rotation","Description"
+"DP1","Display","TopLayer","CL3641AH","22.8600","78.9940","0",""
+"U2","TM1637","TopLayer","SOP65P640X120-20N","27.2923","54.7405","270","LED Drive Control Special Circuit"
+"J1","USB_TYPE_C_2_0","TopLayer","USB_Type-C_16Pin","5.6745","11.6840","270","USB-C (USB TYPE-C) USB 2.0 Receptacle Connector 24 (16+8 Dummy) Position Surface Mount, Right Angle"
+"U1","AMS1117-3.3","TopLayer","SOT229P700X180-4N","4.8260","21.8440","90","Linear Voltage Regulator IC Positive Fixed 1 Output 1A SOT-223-3L"
+"K1","SRD-05VDC-SL-C","TopLayer","RELAY_SRD-05VDC-SL-C","23.8920","16.3830","0","5V Trigger Relay Module For Arduino And Raspberry Pi 5V Trigger Relay Module For Arduino And Raspberry Pi"
+"C4","T491A106K016AT","TopLayer","FP-T491A106K016AT-MFG","10.5410","20.7010","90","CAP TANT 10UF 10% 16V 1206"
+"R3","CRGP1206F10K","TopLayer","FP-CRGP1206-IPC_C","23.3680","41.9100","0","CRGP 1206 10K 1%"
+"R2","CRGP1206F10K","TopLayer","FP-CRGP1206-IPC_C","18.5420","33.1470","270","CRGP 1206 10K 1%"
+"R1","CRGP1206F10K","TopLayer","FP-CRGP1206-IPC_C","11.1760","32.8930","180","CRGP 1206 10K 1%"
+"U6","TXS0102DCUR","TopLayer","FP-DCU0008A-MFG","38.6080","45.0850","180","IC TRNSLTR BIDIRECTIONAL US8"
+"U5","STM8S103F3P6","TopLayer","SOP65P640X120-20N","16.3830","43.1800","90","STM8 series Microcontroller IC 8-Bit 16MHz 8KB (8K x 8) FLASH 20-TSSOP"
+"U4","TXS0102DCUR","TopLayer","FP-DCU0008A-MFG","4.0640","35.0520","90","IC TRNSLTR BIDIRECTIONAL US8"
+"U3","CH340C","TopLayer","SOIC127P600X180-16N","18.4115","4.6294","90","USB to serial chip CH340"
+"SW3","EVQ-QJJ05Q","TopLayer","FP-EVQ-QJJ05Q-MFG","33.7870","66.8020","0","EVQ-QJJ05Q Switch Tactile N.O. SPST Round Button PC Pins 0.005A 12VDC 0.8N Thru-Hole Radial T/R"
+"SW2","EVQ-QJJ05Q","TopLayer","FP-EVQ-QJJ05Q-MFG","23.0552","66.8020","0","EVQ-QJJ05Q Switch Tactile N.O. SPST Round Button PC Pins 0.005A 12VDC 0.8N Thru-Hole Radial T/R"
+"SW1","EVQ-QJJ05Q","TopLayer","FP-EVQ-QJJ05Q-MFG","12.2330","66.8020","0","EVQ-QJJ05Q Switch Tactile N.O. SPST Round Button PC Pins 0.005A 12VDC 0.8N Thru-Hole Radial T/R"
+"R11","CRGP1206F10K","TopLayer","FP-CRGP1206-IPC_C","12.9540","50.9210","0","CRGP 1206 10K 1%"
+"R10","CRGCQ1206F1K0","TopLayer","FP-CRGCQ1206-IPC_C","29.8450","29.9720","0","CRGCQ1206 1K? 0.25W 1% ±100ppm/°C 200V"
+"R9","CRGP1206F10K","TopLayer","FP-CRGP1206-IPC_C","2.4720","44.8371","90","CRGP 1206 10K 1%"
+"R7","CRGP1206F10K","TopLayer","FP-CRGP1206-IPC_C","7.8367","44.8371","90","CRGP 1206 10K 1%"
+"R8","CRGCQ1206F1K0","TopLayer","FP-CRGCQ1206-IPC_C","40.1320","37.2110","180","CRGCQ1206 1K? 0.25W 1% ±100ppm/°C 200V"
+"R6","CRGP1206F10K","TopLayer","FP-CRGP1206-IPC_C","11.1760","35.1790","180","CRGP 1206 10K 1%"
+"R5","ESR18EZPF5101","TopLayer","FP-ESR18-IPC_A","29.8450","26.6523","180","5.1k? ±1% 0.5W 1206 Anti-Surge Chip Resistor AEC-Q200"
+"R4","ESR18EZPF5101","TopLayer","FP-ESR18-IPC_A","29.3070","6.3923","180","5.1k? ±1% 0.5W 1206 Anti-Surge Chip Resistor AEC-Q200"
+"Q1","AO3400A","TopLayer","FP-SOT23-MFG","40.5130","34.1630","270","MOSFET N-CH 30V 5.7A SOT23"
+"P1","61300411021","TopLayer","61300411021","33.9173","54.1289","90",""
+"J3","B2B-XH-A","TopLayer","JST_B2B-XH-A","4.3010","54.3500","270",""
+"J2","39543-0603","TopLayer","39543-0603","38.1101","16.4018","90","3 Position Wire to Board Terminal Block Horizontal with Board 0.197 (5.00mm) Through Hole"
+"D2","1N4148W-7-F","TopLayer","DIOD-SOD123-2_V","40.6430","29.9720","0","Fast Switching Diode, 100 V, 0.15 A, -65 to 150 degC, 2-Pin?SOD123, RoHS, Tape and Reel"
+"D1","LTST-C150KRKT","TopLayer","FP-LTST-C150KRKT-MFG","35.4330","29.9720","180","LED RED CLEAR 1206 SMD"
+"C13","C1206C104K5RACAUTO","TopLayer","FP-C1206C-EB-MFG","9.5276","54.5238","90","CAP CER 0.1UF 50V X7R 1206"
+"C12","C1206C104K5RACAUTO","TopLayer","FP-C1206C-EB-MFG","33.2740","42.6720","90","CAP CER 0.1UF 50V X7R 1206"
+"C11","C1206C104K5RACAUTO","TopLayer","FP-C1206C-EB-MFG","36.7030","39.7510","180","CAP CER 0.1UF 50V X7R 1206"
+"C10","C1206C101K5RACTU","TopLayer","FP-C1206C-EB-MFG","4.8260","44.9580","90","C1206 100 pF X7R 10.00% 50 V"
+"C9","C1206C101K5RACTU","TopLayer","FP-C1206C-EB-MFG","10.2969","44.9580","90","C1206 100 pF X7R 10.00% 50 V"
+"C8","C1206C225K5RACAUTO","TopLayer","FP-C1206C225K5RACAUTO-MFG","23.4950","36.0680","0","CAP CER 2.2UF 50V X7R 1206"
+"C7","C1206C104K5RACAUTO","TopLayer","FP-C1206C-EB-MFG","23.4950","38.4810","180","CAP CER 0.1UF 50V X7R 1206"
+"C6","C1206C104K5RACAUTO","TopLayer","FP-C1206C-EB-MFG","1.2700","39.3700","270","CAP CER 0.1UF 50V X7R 1206"
+"C5","C1206C104K5RACAUTO","TopLayer","FP-C1206C-EB-MFG","5.3340","29.5910","90","CAP CER 0.1UF 50V X7R 1206"
+"C3","T491A106K016AT","TopLayer","FP-T491A106K016AT-MFG","10.5410","25.2730","270","CAP TANT 10UF 10% 16V 1206"
+"C2","C1206C104K5RACAUTO","TopLayer","FP-C1206C-EB-MFG","26.1670","48.6790","180","CAP CER 0.1UF 50V X7R 1206"
+"C1","C1206C104K5RACAUTO","TopLayer","FP-C1206C-EB-MFG","11.8110","7.5000","90","CAP CER 0.1UF 50V X7R 1206"
