@@ -1,11 +1,13 @@
-Output: Generates pick and place files
-Type  : Pick Place
-From  : Variant [[No Variations]] of Project [Thermostat_STM8.PrjPcb]
-   Generated File[Pick Place for PCB_Therm.txt]
-   Generated File[Pick Place for PCB_Therm.csv]
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [Thermostat_STM8.PrjPcb]
+   Generated File[PCB_Therm-RoundHoles.TXT]
+   Generated File[PCB_Therm-SlotHoles.TXT]
+   Generated File[PCB_Therm.LDP]
+   Generated File[PCB_Therm.DRR]
 
 
-Files Generated   : 2
+Files Generated   : 4
 Documents Printed : 0
 
-Finished Output Generation At 23:40:01 On 29.11.2025
+Finished Output Generation At 2:45:14 On 04.12.2025

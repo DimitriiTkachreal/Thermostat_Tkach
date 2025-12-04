@@ -8,16 +8,11 @@
                 "cwd": "${workspaceFolder}/Software/core"
             },
             // --- ГОЛОВНА ЗМІНА ---
-            // Ми використовуємо ";" замість "&&", щоб PowerShell не сварився.
+            // Використовуємо ";" замість "&&", щоб PowerShell не "сварився".
             // 1. Компіляція (cxstm8)
             // 2. Лінковка (clnk) -> створює main.sm8
             // 3. Конвертація (chex) -> створює firmware.s19
-            "command": "cxstm8 -i\"../../platform/cosmic_headers\" +mods0 main.c ; clnk -o main.sm8 Linker.lkf ; chex -o \"../build/firmware.s19\" main.sm8",
-            
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
+           "command": "cxstm8 -i\"../../platform/cosmic_headers\" +mods0 main.c system.c stm8_interrupt_vector.c ../drivers/tm1637.c ; clnk -o main.sm8 Linker.lkf ; chex -o \"../build/firmware.s19\" main.sm8",
             "problemMatcher": []
         },
 

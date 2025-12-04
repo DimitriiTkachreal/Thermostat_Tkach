@@ -9,12 +9,17 @@
 +seg .data -a .ubsct -n .data
 +seg .bss -a .data -n .bss
 
+
+
 # 2. Системні файли та Бібліотеки
 # Стартовий код (щоб запустити main)
 "C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\Lib\crtsi0.sm8"
 
-# Твій скомпільований файл
+# Скомпільований файл
 main.o
+system.o
+stm8_interrupt_vector.o
+../drivers/tm1637.o
 
 # Математична бібліотека (Machine lib) - ВИПРАВЛЯЄ c_ltor, c_lcmp
 "C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\Lib\libm0.sm8"

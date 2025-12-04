@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------------------
-Gerber File Extension Report For: PCB_Therm.GBR   29.11.2025  23:06:43
+Gerber File Extension Report For: PCB_Therm.GBR   04.12.2025  2:44:44
 ------------------------------------------------------------------------------------------
 
 
@@ -15,6 +15,7 @@ Layer Extension     Layer Description
 .GBP                Bottom Paste                            
 .GM1                Mechanical 1                            
 .GM2                Top Designator                          
+.GM3                Board                                   
 .GM5                Top Assembly                            
 .GM11               Top Component Outline                   
 .GM13               Top 3D Body                             
