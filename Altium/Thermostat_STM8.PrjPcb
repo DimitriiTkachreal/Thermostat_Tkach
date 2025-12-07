@@ -50,23 +50,6 @@ PrefsVaultGUID=
 PrefsRevisionGUID=
 
 [Document1]
-DocumentPath=project_sim_config.simcfg
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=0
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=
-
-[Document2]
 DocumentPath=Sheet1_Therm.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -83,7 +66,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=INSMDBMF
 
-[Document3]
+[Document2]
 DocumentPath=PCB_Therm.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -100,7 +83,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=LCERGSOA
 
-[Document4]
+[Document3]
 DocumentPath=Thermostat_STM8.BomDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -117,7 +100,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document5]
+[Document4]
 DocumentPath=Library\Thermostat_Components.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -134,7 +117,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=YDSWGMTK
 
-[Document6]
+[Document5]
 DocumentPath=Library\Thermostat_Components.SCHLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -151,7 +134,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ORTJQVDL
 
-[Document7]
+[Document6]
 DocumentPath=Docs\PCB_Therm.PCBDwf
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -168,7 +151,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=LDSJKPXV
 
-[Document8]
+[Document7]
 DocumentPath=Docs\Documentations.OutJob
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -185,7 +168,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document9]
+[Document8]
 DocumentPath=Docs\PCB_Therm_STM8_Fabrication.PCBDwf
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -202,7 +185,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=OHXUXRVX
 
-[Document10]
+[Document9]
 DocumentPath=Docs\PCB_Therm_STM8_Assembly.PCBDwf
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -219,7 +202,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=OAZLZUKY
 
-[Document11]
+[Document10]
 DocumentPath=Docs\PCB_Dimensions.PCBDwf
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -236,7 +219,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=KIDNFCQL
 
-[Document12]
+[Document11]
 DocumentPath=Docs\PCB_Therm_STM8_BOTTOM.PCBDwf
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -253,7 +236,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=HVIBQUJN
 
-[Document13]
+[Document12]
 DocumentPath=Docs\PCB_Therm_STM8_TOP.PCBDwf
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -275,11 +258,11 @@ DocumentPath=Project Outputs for Thermostat_STM8\Design Rule Check - PCB_Therm.h
 DItemRevisionGUID=
 
 [GeneratedDocument2]
-DocumentPath=Project Outputs for Thermostat_STM8\PCB_Therm-RoundHoles.TXT
+DocumentPath=Project Outputs for Thermostat_STM8\Gerber_Thermostat\PCB_Therm-RoundHoles.TXT
 DItemRevisionGUID=
 
 [GeneratedDocument3]
-DocumentPath=Project Outputs for Thermostat_STM8\PCB_Therm-SlotHoles.TXT
+DocumentPath=Project Outputs for Thermostat_STM8\Gerber_Thermostat\PCB_Therm-SlotHoles.TXT
 DItemRevisionGUID=
 
 [GeneratedDocument4]
@@ -291,7 +274,7 @@ DocumentPath=Project Outputs for Thermostat_STM8\PCB_Therm.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument6]
-DocumentPath=Project Outputs for Thermostat_STM8\PCB_Therm.GBL
+DocumentPath=Project Outputs for Thermostat_STM8\Gerber_Thermostat\PCB_Therm.GBL
 DItemRevisionGUID=
 
 [GeneratedDocument7]
@@ -299,7 +282,7 @@ DocumentPath=Project Outputs for Thermostat_STM8\PCB_Therm.GBP
 DItemRevisionGUID=
 
 [GeneratedDocument8]
-DocumentPath=Project Outputs for Thermostat_STM8\PCB_Therm.GBS
+DocumentPath=Project Outputs for Thermostat_STM8\Gerber_Thermostat\PCB_Therm.GBS
 DItemRevisionGUID=
 
 [GeneratedDocument9]
@@ -311,7 +294,7 @@ DocumentPath=Project Outputs for Thermostat_STM8\PCB_Therm.GKO
 DItemRevisionGUID=
 
 [GeneratedDocument11]
-DocumentPath=Project Outputs for Thermostat_STM8\PCB_Therm.GM
+DocumentPath=Project Outputs for Thermostat_STM8\Gerber_Thermostat\PCB_Therm.GM
 DItemRevisionGUID=
 
 [GeneratedDocument12]
@@ -355,11 +338,11 @@ DocumentPath=Project Outputs for Thermostat_STM8\PCB_Therm.GPT
 DItemRevisionGUID=
 
 [GeneratedDocument22]
-DocumentPath=Project Outputs for Thermostat_STM8\PCB_Therm.GTL
+DocumentPath=Project Outputs for Thermostat_STM8\Gerber_Thermostat\PCB_Therm.GTL
 DItemRevisionGUID=
 
 [GeneratedDocument23]
-DocumentPath=Project Outputs for Thermostat_STM8\PCB_Therm.GTO
+DocumentPath=Project Outputs for Thermostat_STM8\Gerber_Thermostat\PCB_Therm.GTO
 DItemRevisionGUID=
 
 [GeneratedDocument24]
@@ -367,7 +350,7 @@ DocumentPath=Project Outputs for Thermostat_STM8\PCB_Therm.GTP
 DItemRevisionGUID=
 
 [GeneratedDocument25]
-DocumentPath=Project Outputs for Thermostat_STM8\PCB_Therm.GTS
+DocumentPath=Project Outputs for Thermostat_STM8\Gerber_Thermostat\PCB_Therm.GTS
 DItemRevisionGUID=
 
 [GeneratedDocument26]
@@ -376,14 +359,6 @@ DItemRevisionGUID=
 
 [GeneratedDocument27]
 DocumentPath=Project Outputs for Thermostat_STM8\PCB_Therm.REP
-DItemRevisionGUID=
-
-[GeneratedDocument28]
-DocumentPath=Project Outputs for Thermostat_STM8\Pick Place for PCB_Therm.csv
-DItemRevisionGUID=
-
-[GeneratedDocument29]
-DocumentPath=Project Outputs for Thermostat_STM8\Pick Place for PCB_Therm.txt
 DItemRevisionGUID=
 
 [Parameter1]

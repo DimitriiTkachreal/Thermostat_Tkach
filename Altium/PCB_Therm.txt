@@ -1,0 +1,19 @@
+Board Information Report
+Filename     : C:\github\Thermostat_Tkach\Altium\PCB_Therm.PcbDoc
+Date         : 04.12.2025
+Time         : 20:51:54
+Time Elapsed : 00:00:00
+
+Track Width, Count
+    1.969mils, 50
+    3.937mils, 100
+    5mils, 39
+    7.874mils, 429
+    10mils, 14
+    11.811mils, 506
+    15.748mils, 1
+    19.685mils, 77
+    23.622mils, 40
+    39.37mils, 2
+    59.055mils, 9
+count : 11
