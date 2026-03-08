@@ -1,79 +1,87 @@
+/**
+ * @file    tm1637.c
+ * @brief   Реалізація протоколу та бізнес-логіки TM1637
+ */
+
 #include "tm1637.h"
-#include "gpio_config.h"
 
-// Коротка затримка
-void _delay_us(void) { 
-    _asm("nop"); _asm("nop"); _asm("nop"); _asm("nop"); 
-    _asm("nop"); _asm("nop"); _asm("nop"); _asm("nop");
+/* ========================================================================== */
+/* НИЗЬКОРІВНЕВИЙ ТРАНСПОРТ (Bit-Banging)                                     */
+/* ========================================================================== */
+
+static void TM1637_Start(void) 
+{
+    CLK_HIGH();
+    DIO_HIGH();
+    DELAY_10US();
+    DIO_LOW(); 
+    DELAY_10US();
 }
 
-void TM1637_Init(void) {
-    // Push-Pull Output для надійності
-    DISP_PORT_DDR |= (DISP_CLK_PIN | DISP_DIO_PIN);
-    DISP_PORT_CR1 |= (DISP_CLK_PIN | DISP_DIO_PIN); 
-    DISP_PORT_CR2 |= (DISP_CLK_PIN | DISP_DIO_PIN);
-    
-    // Початковий стан - High
-    DISP_PORT_ODR |= DISP_CLK_PIN;
-    DISP_PORT_ODR |= DISP_DIO_PIN;
+static void TM1637_Stop(void) 
+{
+    CLK_LOW();
+    DELAY_10US();
+    DIO_LOW();
+    DELAY_10US();
+    CLK_HIGH();
+    DELAY_10US();
+    DIO_HIGH(); 
+    DELAY_10US();
 }
 
-// --- Службові функції ---
-void _start(void) {
-    DISP_PORT_ODR |= DISP_DIO_PIN;
-    DISP_PORT_ODR |= DISP_CLK_PIN;
-    _delay_us();
-    DISP_PORT_ODR &= ~DISP_DIO_PIN;
-    _delay_us();
-    DISP_PORT_ODR &= ~DISP_CLK_PIN;
-}
-
-void _stop(void) {
-    DISP_PORT_ODR &= ~DISP_CLK_PIN;
-    DISP_PORT_ODR &= ~DISP_DIO_PIN;
-    _delay_us();
-    DISP_PORT_ODR |= DISP_CLK_PIN;
-    _delay_us();
-    DISP_PORT_ODR |= DISP_DIO_PIN;
-}
-
-void _write(unsigned char b) {
-    unsigned char i;
-    for (i = 0; i < 8; i++) {
-        DISP_PORT_ODR &= ~DISP_CLK_PIN;
-        _delay_us();
-        if (b & 0x01) DISP_PORT_ODR |= DISP_DIO_PIN;
-        else          DISP_PORT_ODR &= ~DISP_DIO_PIN;
-        _delay_us();
-        DISP_PORT_ODR |= DISP_CLK_PIN;
-        _delay_us();
-        b >>= 1;
+static void TM1637_WriteByte(uint8_t data) 
+{
+    uint8_t i;
+    for (i = 0; i < 8; i++) 
+    {
+        CLK_LOW();
+        DELAY_10US();
+        
+        if (data & 0x01) { DIO_HIGH(); } 
+        else             { DIO_LOW();  }
+        DELAY_10US();
+        
+        CLK_HIGH();
+        DELAY_10US();
+        
+        data = data >> 1; 
     }
     
-    // ACK
-    DISP_PORT_ODR &= ~DISP_CLK_PIN;
-    DISP_PORT_ODR |= DISP_DIO_PIN;
-    _delay_us();
-    DISP_PORT_ODR |= DISP_CLK_PIN;
-    _delay_us();
-    DISP_PORT_ODR &= ~DISP_CLK_PIN;
+    /* 9-й такт (ACK) */
+    CLK_LOW();
+    DIO_HIGH(); /* Відпускаємо лінію для підтвердження від дисплея */
+    DELAY_10US();
+    CLK_HIGH(); 
+    DELAY_10US();
+    CLK_LOW();  
+    DELAY_10US();
 }
 
-const unsigned char _seg[] = { 
-    0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x6f 
-};
+/* Оптимізація (DRY): Відправка одиночної команди */
+static void TM1637_SendCommand(uint8_t cmd) 
+{
+    TM1637_Start();
+    TM1637_WriteByte(cmd);
+    TM1637_Stop();
+}
 
-// Головна функція виводу
-void TM1637_Show(unsigned int num) {
-    unsigned char i;
-    unsigned char d[4];
-    
-    if(num > 9999) num = 9999;
-    d[0]=num/1000; d[1]=(num/100)%10; d[2]=(num/10)%10; d[3]=num%10;
+/* ========================================================================== */
+/* БЛОК 3: БІЗНЕС-ЛОГІКА ТM1637 (Тепер лише базовий вивід)                */
+/* ========================================================================== */
 
-    _start(); _write(0x40); _stop();
-    _start(); _write(0xC0);
-    for(i=0; i<4; i++) _write(_seg[d[i]]);
-    _stop();
-    _start(); _write(0x8F); _stop(); 
+void TM1637_ShowRaw(uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3) 
+{
+    /* Відправка в дисплей */
+    TM1637_SendCommand(0x40); /* Режим автоінкременту адреси */
+
+    TM1637_Start();
+    TM1637_WriteByte(0xC0);   /* Стартова адреса GRID1 */
+    TM1637_WriteByte(d0);
+    TM1637_WriteByte(d1);
+    TM1637_WriteByte(d2);
+    TM1637_WriteByte(d3); 
+    TM1637_Stop();
+
+    TM1637_SendCommand(0x8F); /* Увімкнути дисплей (макс. яскравість) */
 }

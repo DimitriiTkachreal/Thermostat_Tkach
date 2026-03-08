@@ -1,0 +1,25 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: Internal_PCB_Thermostat_STM8_v1.0.PcbDoc   19.02.2026  16:37:35
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : Gerber-RoundHoles.TXT
+ASCII SlotHoles File : Gerber-SlotHoles.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      12mil (0.3mm)                                             Round             264       PTH        49.47inch (1256.60mm)
+T2      16mil (0.4mm)                                             Round             74        PTH        18.95inch (481.37mm)
+T3      26mil (0.65mm)                                            Slot              4         PTH        1.50inch (38.17mm)
+T4      39mil (1mm)                                               Round             18        PTH        3.22inch (81.69mm)
+T5      41mil (1.05mm)                                            Round             2         PTH        0.10inch (2.50mm)
+T6      43mil (1.1mm)                                             Round             4         PTH        0.30inch (7.62mm)
+T7      47mil (1.2mm)                                             Round             3         PTH        0.39inch (10.00mm)
+T8      51mil (1.29mm)                                            Round             1         PTH        0.00inch (0.00mm)
+T9      52mil (1.32mm)                                            Round             4         PTH        1.43inch (36.20mm)
+T10     26mil (0.65mm)                                            Round             2         NPTH       0.23inch (5.78mm)
+T11     126mil (3.2mm)                                            Round             4         NPTH       7.79inch (197.75mm)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              380
+
+Total Processing Time (hh:mm:ss) : 00:00:00

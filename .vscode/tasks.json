@@ -7,16 +7,13 @@
             "options": {
                 "cwd": "${workspaceFolder}/Software/core"
             },
-            // --- ГОЛОВНА ЗМІНА ---
-            // Використовуємо ";" замість "&&", щоб PowerShell не "сварився".
-            // 1. Компіляція (cxstm8)
-            // 2. Лінковка (clnk) -> створює main.sm8
-            // 3. Конвертація (chex) -> створює firmware.s19
-           "command": "cxstm8 -i\"../../platform/cosmic_headers\" +mods0 main.c system.c stm8_interrupt_vector.c ../drivers/tm1637.c ; clnk -o main.sm8 Linker.lkf ; chex -o \"../build/firmware.s19\" main.sm8",
+            "command": "cxstm8 +mods0 -i\"../bsp\" -i\"../mcu\" -i\"../drivers\" -i\"../app\" main.c stm8_interrupt_vector.c ../mcu/gpio.c ../mcu/clock.c ../mcu/adc.c ../mcu/eeprom.c ../mcu/timer.c ../mcu/uart.c ../drivers/tm1637.c ../drivers/ntc.c ../drivers/buttons.c ../app/settings.c ../app/ui.c ../app/thermostat.c ; clnk -o main.sm8 Linker.lkf ; chex -o \"../build/firmware.s19\" main.sm8",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "problemMatcher": []
         },
-
-        // --- ЗАДАЧА ПРОШИВКИ (STVP) ---
         {
             "label": "flash: stvp",
             "type": "process",
@@ -32,14 +29,6 @@
                 "-FileProg=${workspaceFolder}\\Software\\build\\firmware.s19"
             ],
             "dependsOn": "build: firmware",
-            "problemMatcher": []
-        },
-
-        // --- ОЧИСТКА ---
-        {
-            "label": "clean: build",
-            "type": "shell",
-            "command": "del \"Software\\build\\*.*\" /q ; del \"Software\\core\\*.o\" /q ; del \"Software\\core\\*.sm8\" /q",
             "problemMatcher": []
         }
     ]

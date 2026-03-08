@@ -9,7 +9,6 @@
             "defines": [
                 "STM8S103"
             ],
-            // Цей параметр допомагає ігнорувати деякі помилки синтаксису Cosmic
             "cStandard": "c89",
             "intelliSenseMode": "gcc-x64"
         }

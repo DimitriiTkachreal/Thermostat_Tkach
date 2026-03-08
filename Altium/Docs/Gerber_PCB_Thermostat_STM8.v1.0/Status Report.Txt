@@ -1,0 +1,15 @@
+Output: Gerber Files
+Type  : Gerber
+From  : Variant [[No Variations]] of PCB Document [Internal_PCB_Thermostat_STM8_v1.0.PcbDoc]
+   Generated File[Gerber.GTO]
+   Generated File[Gerber.GTS]
+   Generated File[Gerber.GTL]
+   Generated File[Gerber.GBL]
+   Generated File[Gerber.GBS]
+   Generated File[Gerber.GM]
+
+
+Files Generated   : 6
+Documents Printed : 0
+
+Finished Output Generation At 16:37:36 On 19.02.2026

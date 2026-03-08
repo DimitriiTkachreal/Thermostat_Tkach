@@ -1,116 +1,84 @@
-#include "iostm8s103.h"
+/**
+ * @file    main.c
+ * @brief   Головний файл проєкту (Точка входу).
+ * @details Ініціалізує всі модулі та запускає нескінченний цикл опитування (Super-loop).
+ */
+#include "board_config.h"
+#include "clock.h"
+#include "gpio.h"
+#include "timer.h"
+#include "buttons.h"
+#include "ntc.h"
+#include "adc.h"
+#include "tm1637.h"
+#include "eeprom.h"
+#include "settings.h"
+#include "thermostat.h"
+#include "ui.h"
+#include "uart.h"
 
-// CLK -> PC7
-// DIO -> PC6
-// RELAY -> PC3
+/* Змінна для неблокуючої відправки телеметрії (логування) */
+static uint32_t last_log_time = 0;
+/*Для оновлення дисплея*/
+static uint32_t last_ui_update = 0;
 
-#define CLK_PIN  (1 << 7)
-#define DIO_PIN  (1 << 6)
-#define RELAY_PIN (1 << 3)
+void main(void)
+{
+    /* ====================================================================== */
+    /* 1. ІНІЦІАЛІЗАЦІЯ ЗАЛІЗА (Hardware Abstraction Layer)                   */
+    /* ====================================================================== */
+    /* Важливо: Годинник завжди запускається першим! */
+    CLOCK_Init();  
+    GPIO_Init();   
+    Timer4_Init();  
+    UART_Init();   
+    ADC_Init();
 
-void delay_us(void) {
-    _asm("nop"); _asm("nop"); _asm("nop"); _asm("nop");
-    _asm("nop"); _asm("nop"); _asm("nop"); _asm("nop");
-}
-
-void delay_ms(unsigned int ms) {
-    unsigned long i;
-    for (i = 0; i < (ms * 1000UL); i++) { _asm("nop"); }
-}
-
-// --- КЕРУВАННЯ ПІНАМИ (PUSH-PULL) ---
-void Pin_Low(unsigned char pin) {
-    PC_ODR &= ~pin; // 0
-}
-
-void Pin_High(unsigned char pin) {
-    PC_ODR |= pin;  // 1
-}
-
-// --- ПРОТОКОЛ TM1637 ---
-void TM_Start(void) {
-    Pin_High(DIO_PIN);
-    Pin_High(CLK_PIN);
-    delay_us();
-    Pin_Low(DIO_PIN);
-    delay_us();
-    Pin_Low(CLK_PIN);
-}
-
-void TM_Stop(void) {
-    Pin_Low(CLK_PIN);
-    Pin_Low(DIO_PIN);
-    delay_us();
-    Pin_High(CLK_PIN);
-    delay_us();
-    Pin_High(DIO_PIN);
-}
-
-void TM_WriteByte(unsigned char b) {
-    unsigned char i;
-    for (i = 0; i < 8; i++) {
-        Pin_Low(CLK_PIN);
-        delay_us();
-        
-        if (b & 0x01) Pin_High(DIO_PIN);
-        else          Pin_Low(DIO_PIN);
-        
-        delay_us();
-        Pin_High(CLK_PIN);
-        delay_us();
-        
-        b >>= 1;
-    }
+    _asm("rim");
     
-    // ACK (Просто "тік-так", ігноруємо відповідь)
-    Pin_Low(CLK_PIN);
-    Pin_Low(DIO_PIN); // Тут ми самі притискаємо, щоб не висіло
-    delay_us();
-    Pin_High(CLK_PIN);
-    delay_us();
-    Pin_Low(CLK_PIN);
-}
-
-void main(void) {
-    unsigned int counter = 0;
-    unsigned char i;
+    /* ====================================================================== */
+    /* 2. ІНІЦІАЛІЗАЦІЯ БІЗНЕС-ЛОГІКИ (Business Logic Layer)                  */
+    /* ====================================================================== */
+    /* Важливо: Settings_Init має бути до Thermostat_Init, бо мозок читає EEPROM */
+    Settings_Init();     
+    Thermostat_Init();   
+    UI_Init();   
     
-    CLK_CKDIVR = 0x00; // 16 MHz
+    UI_StartAnimation();//Напис старт
 
-    // --- НАЛАШТУВАННЯ ПІНІВ (PUSH-PULL OUTPUT) ---
-    // PC3, PC6, PC7 -> Output
-    PC_DDR |= (CLK_PIN | DIO_PIN | RELAY_PIN);
-    // PC3, PC6, PC7 -> Push-Pull (Сильний вихід)
-    PC_CR1 |= (CLK_PIN | DIO_PIN | RELAY_PIN); 
-    // PC3, PC6, PC7 -> Fast mode
-    PC_CR2 |= (CLK_PIN | DIO_PIN | RELAY_PIN);
+    /* Сигнал у термінал про успішне завантаження (Телеметрія) */
+    UART_SendString("\n--- Thermostat Boot OK ---\n");
 
-    // Початковий стан
-    Pin_High(CLK_PIN);
-    Pin_High(DIO_PIN);
+    /* ====================================================================== */
+    /* 3. ГОЛОВНИЙ ЦИКЛ (Super-loop / Round-Robin)                            */
+    /* ====================================================================== */
+    while (1)
+    {
+        uint32_t current_time = Timer_GetMillis();
 
-    while (1) {
-        // 1. Увімкнути дисплей (Яскравість макс)
-        TM_Start();
-        TM_WriteByte(0x8F); // Display ON + Brightness
-        TM_Stop();
-
-        // 2. Записати дані (Авто-адреса)
-        TM_Start();
-        TM_WriteByte(0x40); 
-        TM_Stop();
-
-        // 3. Вивести "8888" (щоб точно побачити, чи працює)
-        TM_Start();
-        TM_WriteByte(0xC0); // Адреса першої цифри
-        for(i=0; i<4; i++) {
-            TM_WriteByte(0x7F); // Код "8" з точкою (всі сегменти)
+        /* А) Збір даних із зовнішнього світу */
+        Buttons_Process();
+        if ((current_time - last_ui_update) >= 350) 
+        {
+        /* Б) Обробка фізики та керування реле */
+        Thermostat_Process();
+        /* В) Обробка меню та малювання на екрані */
+        UI_Process();
+        last_ui_update = current_time;
         }
-        TM_Stop();
-        
-        // Блимаємо реле для перевірки життя
-        PC_ODR ^= RELAY_PIN;
-
-        delay_ms(500);
+        /* Г) Телеметрія (Відправляємо лог у термінал комп'ютера кожні 2 секунди) */
+        current_time = Timer_GetMillis();
+        if ((current_time - last_log_time) >= 2000) 
+        {
+            UART_SendString("T: ");
+            UART_SendInt(Thermostat_GetCurrentTemp());
+            UART_SendString(" | Set: ");
+            UART_SendInt(Settings_Get(PARAM_TARGET_TEMP));
+            UART_SendString(" | State: ");
+            UART_SendInt((int16_t)Thermostat_GetState());
+            UART_SendString("\n");
+            
+            last_log_time = current_time;
+        }
     }
 }

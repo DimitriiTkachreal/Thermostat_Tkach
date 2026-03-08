@@ -1,35 +1,46 @@
-# 1. Визначення сегментів (Segments)
-# Код (Flash) починається з 0x8080 для STM8S103
-+seg .text -b 0x8080 -n .text
-+seg .const -a .text -n .const
+# LINKER SCRIPT - STM8S103F3 (Corrected Relative Paths)
 
-# Змінні (RAM) починаються з 0x00
-+seg .bsct -b 0x0 -n .bsct
+# 1. Memory Segments
++seg .const -b 0x8000 -m 0x2000 -n .const
++seg .text -a .const -n .text
++seg .bsct -b 0x0 -m 0x400 -n .bsct
 +seg .ubsct -a .bsct -n .ubsct
 +seg .data -a .ubsct -n .data
 +seg .bss -a .data -n .bss
 
-
-
-# 2. Системні файли та Бібліотеки
-# Стартовий код (щоб запустити main)
+# 2. Startup File
 "C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\Lib\crtsi0.sm8"
 
-# Скомпільований файл
-main.o
-system.o
+# 3. Object Files
+# Вказуємо лінкеру шукати файли там, де вони лежать (у підпапках)
+
+# Core (вони лежать тут, у core)
 stm8_interrupt_vector.o
+main.o
+
+# MCU Drivers (шукаємо в ../mcu/)
+../mcu/gpio.o
+../mcu/clock.o
+../mcu/uart.o
+../mcu/adc.o
+../mcu/eeprom.o
+../mcu/timer.o
+
+# Board Drivers (шукаємо в ../drivers/)
 ../drivers/tm1637.o
+../drivers/buttons.o
+../drivers/ntc.o
 
-# Математична бібліотека (Machine lib) - ВИПРАВЛЯЄ c_ltor, c_lcmp
+# App Logic (шукаємо в ../app/)
+../app/settings.o
+../app/ui.o
+../app/thermostat.o
+
+# 4. Libraries (Математика)
 "C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\Lib\libm0.sm8"
-
-# Стандартна бібліотека (Integer lib)
 "C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\Lib\libis0.sm8"
 
-
-# 3. Визначення символів (Symbols)
-# Це виправляє помилки __stack, __memory, __endzp
-+def __endzp=@.ubsct      # Кінець "нульової сторінки"
-+def __memory=@.bss       # Кінець зайнятої пам'яті
-+def __stack=0x3FF        # Вершина стека (кінець RAM для STM8S103F3)
+# 5. End of Segments
++def __endzp=@.ubsct
++def __memory=@.bss
++def __stack=0x3FF
