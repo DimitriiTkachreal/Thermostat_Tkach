@@ -8,7 +8,7 @@
 #ifndef CLOCK_H
 #define CLOCK_H
 
-#include "board_config.h"
+#include "mcu_regs.h"
 #define CLK_CKDIVR_HSIDIV_MASK  ((uint8_t)((1 << 3) | (1 << 4)))
 /**
  * @brief   Ініціалізує систему тактування.

@@ -23,6 +23,7 @@ typedef enum
     PARAM_P4_CALIB,        /* Калібрування (*10) */
     PARAM_P5_DELAY,        /* Затримка (хвилини) */
     PARAM_P6_ALARM,        /* Аварія (*10) */
+    PARAM_P7_RESET,        /* Скидання до заводьсих налаштувань*/
     PARAM_COUNT            /* Кількість параметрів (8) */
 } param_id_t;
 

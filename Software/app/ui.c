@@ -113,7 +113,7 @@ static void UI_DrawTemp(int16_t temp)
 {
     uint8_t d0, d1, d2, d3;
     uint8_t is_negative = 0;
-    uint8_t tenths, ones, tens;
+    uint8_t tenths, ones, tens,hundreds;
 
     if (temp < 0)
     {
@@ -124,10 +124,30 @@ static void UI_DrawTemp(int16_t temp)
     tenths = temp % 10;
     ones   = (temp / 10) % 10;
     tens   = (temp / 100) % 10;
+    hundreds   = (temp / 1000) % 10;
+    
 
-    d0 = is_negative ? SYM_MINUS : SYM_BLANK; 
-    d1 = (tens == 0 && !is_negative) ? SYM_BLANK : DIGIT_CODES[tens];
-    d2 = DIGIT_CODES[ones] | 0x80; /* Накладаємо крапку */
+    if (is_negative) 
+    {
+        d0 = SYM_MINUS;
+        d1 = (tens == 0) ? SYM_BLANK : DIGIT_CODES[tens];
+    } 
+    else 
+    {
+        
+        if (hundreds > 0) 
+        {
+            d0 = DIGIT_CODES[hundreds];
+            d1 = DIGIT_CODES[tens]; 
+        } 
+        else 
+        {
+            d0 = SYM_BLANK;
+            d1 = (tens == 0) ? SYM_BLANK : DIGIT_CODES[tens];
+        }
+    }
+
+    d2 = DIGIT_CODES[ones] | 0x80; 
     d3 = DIGIT_CODES[tenths];
     
     TM1637_ShowRaw(d0, d1, d2, d3);
@@ -266,7 +286,7 @@ void UI_Process(void)
             }
             if (event_down == BTN_EVENT_CLICK)
             {
-                if (current_param_index == PARAM_P0_MODE) current_param_index = PARAM_P6_ALARM; /* P7 ми зробимо окремо, поки P0-P6 */
+                if (current_param_index == PARAM_P0_MODE) current_param_index = PARAM_P7_RESET; /* P7 ми зробимо окремо, поки P0-P6 */
                 else current_param_index--;
             }
             if (event_set == BTN_EVENT_CLICK)
@@ -292,6 +312,11 @@ void UI_Process(void)
                 {
                     /* Затримка малюється без крапки (цілі хвилини) */
                     UI_DrawTemp(edit_value * 10); 
+                }
+                else if (current_param_index == PARAM_P7_RESET)
+                {
+                    /* Малюємо просто 0 або 1 в кінці екрану без крапок */
+                    TM1637_ShowRaw(SYM_BLANK, SYM_BLANK, SYM_BLANK, DIGIT_CODES[edit_value]);
                 }
                 else
                 {
@@ -329,6 +354,7 @@ void UI_Process(void)
                     case PARAM_P4_CALIB:     min_limit = -100; max_limit = 100; break; /* -10.0 ... 10.0 °C */
                     case PARAM_P5_DELAY:     min_limit = 0; max_limit = 10; break; /* 0 ... 10 хв */
                     case PARAM_P6_ALARM:     min_limit = HARDWARE_TEMP_MIN; max_limit = HARDWARE_TEMP_MAX; break;
+                    case PARAM_P7_RESET:     min_limit = 0; max_limit = 1; break; /* 0-Ні, 1-Так */
                     default: break; 
                 }
 
@@ -339,9 +365,18 @@ void UI_Process(void)
             
             if (event_set == BTN_EVENT_CLICK)
             {
+                if (current_param_index == PARAM_P7_RESET || event_set == BTN_EVENT_HOLD)
+                {
+                    if (edit_value == 1) 
+                    {
+                        Settings_ResetToDefault();
+                    }
+                }
+                else
+                {
                 /* Зберігаємо нове значення в EEPROM */
                 Settings_Set(current_param_index, edit_value);
-                /* Повертаємося до вибору "P..." */
+                }
                 current_state = STATE_MENU_SELECT;
             }
             break;

@@ -18,6 +18,7 @@
 #define ADC1_CR1_ADON               ((uint8_t)(1 << 0))
 #define ADC1_CR1_SPSEL_MASK         ((uint8_t)((1 << 6) | (1 << 5) | (1 << 4)))
 #define ADC1_CR1_SPSEL_FMASTER_DIV4 ((uint8_t)(1 << 5))
+#define CLK_PCKENR2_ENABLE_BIT      ((uint8_t)(1 << 3))
 
 #define ADC1_CR2_ALIGN_RIGHT        ((uint8_t)(1 << 3))
 

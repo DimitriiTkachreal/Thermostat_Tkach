@@ -58,7 +58,7 @@ static void TM1637_WriteByte(uint8_t data)
     DELAY_10US();
 }
 
-/* Оптимізація (DRY): Відправка одиночної команди */
+/* Відправка одиночної команди */
 static void TM1637_SendCommand(uint8_t cmd) 
 {
     TM1637_Start();

@@ -58,7 +58,7 @@ void main(void)
 
         /* А) Збір даних із зовнішнього світу */
         Buttons_Process();
-        if ((current_time - last_ui_update) >= 350) 
+        if ((current_time - last_ui_update) >= 250) 
         {
         /* Б) Обробка фізики та керування реле */
         Thermostat_Process();
